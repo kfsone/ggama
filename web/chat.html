@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat App</title>
+<style type="text/css">
+
+	body, html {
+            /*font-family: Arial, sans-serif;
+            padding: 20px;*/
+	    margin: 0;
+	    padding: 0;
+	    height: 100%;
+	    display: flex;
+	    flex-direction: column;
+        }
+        .message-container {
+            margin-bottom: 8px;
+        }
+        .you-message {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .them-message {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .message {
+            padding: 10px 20px;
+            border-radius: 20px;
+            max-width: 60%;
+            overflow-wrap: break-word;
+        }
+        .you {
+            background-color: #ccc;
+        }
+        .them {
+            background-color: #ccffcc;
+        }
+        #chat {
+	    flex: 1;
+	    overflow-y: auto;
+	    border: 1px solid #ccc;
+	    padding: 3px;
+            /*height: calc(100% - 50px);
+	    width: 100%;*/
+        }
+	#entry {
+	    display: flex;
+	    justify-content: flex-end;
+	    padding: 3px;
+	}
+	input {
+	    width: 100%;
+	}
+</style>
+    <script src="/eel.js"></script>
+    <script>
+        eel.expose(display_message);
+        function display_message(msg, who) {
+            const container = document.createElement('div');
+            container.className = 'message-container ' + (who === 'you' ? 'you-message' : 'them-message');
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message ' + (who === 'you' ? 'you' : 'them');
+            messageDiv.innerHTML = msg.replace(/\n/g, '<br>');
+
+            container.appendChild(messageDiv);
+            document.getElementById("chat").appendChild(container);
+        }
+
+        function sendMessage() {
+            var input = document.getElementById('userInput');
+            eel.on_user_send(input.value);
+            input.value = '';
+        }
+	function sayHello() {
+	    display_message("Repository loaded: ask questions.", "them")
+	}
+    </script>
+</head>
+<body onload="sayHello()">
+    <div id="chat">
+    </div>
+    <div id="entry">
+      <input type="text" id="userInput" onkeydown="if (event.key === 'Enter') sendMessage()">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+</body>
+</html>
+

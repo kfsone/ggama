@@ -1,0 +1,22 @@
+[general]
+# name for where the tool will store data it gains from inspecting the repository
+vector_file = "repository-knowledge.pkl"
+
+[openai]
+# provide an API key for using OpenAI; support for LocalLLMs awaits your PR.
+api_key = "sk-Suuure1mGonnaLeaveMyActualApiKeyInHereForYou2Use"
+
+[github]
+# A github access token is required to use the API.
+token   = "github_pat_IWasBornYesterdayAndWouldYouLikeMySocialSecurityNumberWhileWereHereYouMustBeCrazy!"
+# Deconstruct the repos: https://github.com/<user>/<repos>
+user    = ; e.g "kfsone"
+repos   = ; e.g "ggama"
+# Specify which branch to inspect
+branch  = "main"
+
+# list dirs you want included
+dirs       = ["."]
+
+# list extensions you want included
+extensions = [".py", ".csv", ".sql", ".md", ".toml"]

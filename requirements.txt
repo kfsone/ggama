@@ -1,0 +1,4 @@
+eel
+llama-index
+llama-index-readers-github
+toml
